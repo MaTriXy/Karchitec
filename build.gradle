@@ -1,22 +1,33 @@
 buildscript {
-    ext.kotlin_version = '1.1.2-3'
+    ext.kotlin_version = '1.1.4-2'
 
     repositories {
         jcenter()
         maven { url 'https://maven.google.com' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.2'
+        classpath 'com.android.tools.build:gradle:3.0.0-beta7'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
+plugins {
+    id "io.gitlab.arturbosch.detekt" version "1.0.0.M11"
+}
+
+detekt {
+    version = "1.0.0.M11"
+    config = "$input/detekt.yml"
+    input = "$input/app/src/main/java"
+    filters = ".*test.*,.*/resources/.*,.*/tmp/.*"
+}
+
 allprojects {
     repositories {
+        google()
         maven { url 'https://jitpack.io' }
         jcenter()
         mavenCentral()
-        maven { url 'https://maven.google.com' }
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     }
 }

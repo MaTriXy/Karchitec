@@ -46,7 +46,7 @@ constructor(
         ButterKnife.bind(this, view)
         initToolbar()
         list.layoutManager = layoutManager
-        list.itemAnimator = DefaultItemAnimator() as RecyclerView.ItemAnimator?
+        list.itemAnimator = DefaultItemAnimator()
         swipeRefresh.setOnRefreshListener({ delegate?.onRefresh() })
     }
 
@@ -76,7 +76,7 @@ constructor(
         stopRefresh()
         if (error == null) return
         when (error) {
-            SUCCESS -> {}
+            SUCCESS -> Unit
             DISCONNECTED -> showToast(R.string.net_error)
             BAD_URL -> showToast(R.string.url_error)
             NOT_A_FEED -> showToast(R.string.feed_error)
